@@ -1,2 +1,3 @@
 # JS-Fund
-Starting with JS-Fundamental
+
+Starting with JS-Fundamental in SoftUni

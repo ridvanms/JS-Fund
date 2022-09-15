@@ -3,3 +3,4 @@ function multiplay(number) {
   console.log(num * 2);
 }
 multiplay(2);
+multiplay(2);

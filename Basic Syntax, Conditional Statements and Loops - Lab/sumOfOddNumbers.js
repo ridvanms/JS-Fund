@@ -15,4 +15,4 @@ function sumOfOddNumbers(value) {
     console.log(`Sum: ${sum}`)
 
 }
-sumOfOddNumbers(3)
+sumOfOddNumbers()

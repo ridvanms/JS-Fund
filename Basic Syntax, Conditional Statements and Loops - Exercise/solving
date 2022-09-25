@@ -1,0 +1,2 @@
+let user = 'Acer'
+console.log(user[3])

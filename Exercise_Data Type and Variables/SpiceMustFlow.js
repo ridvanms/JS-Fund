@@ -15,8 +15,13 @@ function spice(yield) {
         totalAmount += yieldConsume;
         // extracting the spices
         startingYield -= 10;
+        if (startingYield < 100) {
+            totalAmount -= 26
+        }
+        if (totalAmount < 0) {
+            totalAmount = 0
+        }
     }
-    totalAmount -= miningCrew;
     console.log(days + '\n' + totalAmount);
 }
 spice(450)

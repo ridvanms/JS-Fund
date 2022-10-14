@@ -45,7 +45,6 @@ function magicMatrices(matrix) {
       return false;
     }
   }
-
   return true;
 }
 magicMatrices([

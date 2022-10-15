@@ -29,6 +29,7 @@
 //   ],
 // ]);
 // // row / column  sums
+
 function magicMatrices(matrix) {
   for (let i = 0; i < matrix.length - 1; i++) {
     let sumROne = matrix[i].reduce((a, b) => a + b, 0);

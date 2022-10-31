@@ -1,53 +1,27 @@
 function movies(arr) {
-  let arrLength = arr.length;
+  let movies = [];
 
-  let names = [];
-  let directors = [];
-  let data = [];
-
-  let first = [];
-
-  for (let i = 0; i < arrLength; i++) {
-    let elements = arr.shift();
-
-    if (elements.includes("addMovie")) {
-      let [_, ...name] = elements.split(" ");
-      names.push([...name].join(" "));
-    }
-    if (elements.includes("directedBy")) {
-      let [...arr] = elements.split(" ");
-      let index = [...arr].indexOf("directedBy");
-
-      let nameOfMovie = [...arr].slice(0, index).join(" ");
-
-      if (names.includes(nameOfMovie)) {
-        directors[names.indexOf(nameOfMovie)] = [...arr]
-          .slice(index + 1)
-          .join(" ");
-        first[names.indexOf(nameOfMovie)];
+  arr.forEach((el) => {
+    if (el.includes("addMovie")) {
+      let name = el.split("addMovie ")[1];
+      movies.push({ name });
+    } else if (el.includes("directedBy")) {
+      let [name, director] = el.split(" directedBy ");
+      let movie = movies.find((m) => m.name === name);
+      if (movie) {
+        movie.director = director;
+      }
+    } else if (el.includes("onDate")) {
+      let [movieName, date] = el.split(" onDate ");
+      let movie = movies.find((movie) => movie.name === movieName);
+      if (movie) {
+        movie.date = date;
       }
     }
-    if (elements.includes("onDate")) {
-      let [...arr] = elements.split(" ");
-      let index = [...arr].indexOf("onDate");
-
-      let nameOfMovie = [...arr].slice(0, index).join(" ");
-
-      if (names.includes(nameOfMovie)) {
-        data[names.indexOf(nameOfMovie)] = [...arr][index + 1];
-      }
-    }
-  }
-  for (let i = 0; i < names.length; i++) {
-    if (names[i] && directors[i] && data[i]) {
-      let movie = {
-        name: names[i],
-        director: directors[i],
-        date: data[i],
-      };
-      console.log(JSON.stringify(movie));
-    }
-  }
+  });
+  movies.forEach((movie) => {
+    if (movie.director && movie.date) console.log(JSON.stringify(movie));
+  });
 }
 movies([
   "addMovie Fast and Furious",

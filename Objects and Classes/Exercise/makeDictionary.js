@@ -1,15 +1,13 @@
 function makeDictionary(arr) {
-
-    let obj = {};
-    for (const lineJson of arr) {
-        let jsonToObj = JSON.parse(lineJson);
-        obj = Object.assign(obj, jsonToObj);
+    let mainObj = {}
+    for (const lineObj of arr) {
+        let obj = JSON.parse(lineObj);
+        mainObj = Object.assign(mainObj, obj);
     }
-    let sortedKeys = Object.keys(obj);
+    let sortedKeys = Object.keys(mainObj); //['Coffee','Bus','Boiler'...]
     sortedKeys.sort((a, b) => a.localeCompare(b));
-
     for (const key of sortedKeys) {
-        let definition = obj[key];
+        let definition = mainObj[key];
         console.log(`Term: ${key} => Definition: ${definition}`)
     }
 }

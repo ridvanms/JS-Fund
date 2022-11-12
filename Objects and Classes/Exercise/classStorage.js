@@ -1,33 +1,54 @@
+// class Storage {
+
+//     constructor(capacity) {
+//         this.capacity = +capacity
+//         this.productList = [];
+//     }
+//     get totalCost() {
+//         return this.productList.reduce((i, el) => { return i + el.price * el.quantity }, 0);
+//     }
+
+//     addProduct(product) {
+//         this.productList.push(product)
+//         this.capacity -= Number(product.quantity);
+//         return;
+//     }
+
+//     getProducts() {
+//         let products = [];
+//         this.productList.forEach(product => {
+//             products.push(JSON.stringify(product))
+//         })
+//         return products.join('\n')
+//     }
+// }
+
+
+
 class Storage {
-    totalCost = 0;
-    productList = [];
     constructor(capacity) {
-        this.capacity = +capacity
+        this.capacity = capacity;
+        this.storage = [];
     }
+
+    get totalCost() {
+        return this.storage.reduce((acc, el) => { return acc + el.price * el.quantity }, 0);
+    }
+
     addProduct(product) {
-        let productObj = {
-            name: product.name,
-            price: Number(product.price),
-            quantity: Number(product.quantity),
-
-        }
-        if (productObj.name && productObj.price && productObj.quantity)
-            this.productList.push(product)
-
-        this.totalCost += Number(product.price) * Number(product.quantity)
-
-        this.capacity -= Number(product.quantity);
+        this.storage.push(product);
+        this.capacity -= product.quantity;
+        return;
     }
 
     getProducts() {
-        let products = [];
-        this.productList.forEach(product => {
-            products.push(JSON.stringify(product))
+        let output = [];
+        this.storage.forEach(product => {
+            output.push(JSON.stringify(product));
         })
-        return products.join('\n')
+        return output.join('\n');
     }
 }
-
 let productOne = { name: 'Tomato', price: 0.90, quantity: 19 };
 let productTwo = { name: 'Potato', price: 1.10, quantity: 10 };
 let storage = new Storage(30);

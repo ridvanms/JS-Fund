@@ -1,35 +1,23 @@
-function winningTicket(tickets) {
-    let countOfTickets = tickets.split(', ')
-    countOfTickets.forEach(ticket => {
-        ticket = ticket.trim();
-        if (ticket.length != 20) return console.log(`invalid ticket`)
+function winningTickets(arr) {
+    let pattern = /(?=.{20}).*?(?=(?<ch>[@#$^]))(?<match>\k<ch>{6,}).*(?<=.{10})\k<match>.*/;
 
-        let winningTicketPattern = /(?<symbols>[@#$^]+)/gm
+    arr = arr[0].trim().split(/\s*,\s*/);
+    for (let line of arr) {
+        let match = pattern.exec(line);
 
-        let matchTicket = ticket.match(winningTicketPattern)
-
-        if (!matchTicket) return console.log(`ticket "${ticket}" - no match`);
-
-        let byTheLessSymbols = 0
-        if (matchTicket[0].length > 10) byTheLessSymbols = matchTicket[0].length / 2
-        else byTheLessSymbols = matchTicket[0].length
-
-        let symbol = ''
-        for (let i = 0; i < matchTicket.length; i++) {
-            symbol = matchTicket[0][0]
-
-
-            if (byTheLessSymbols > matchTicket[i].length) byTheLessSymbols = matchTicket[i].length;
+        if (match) {
+            if (match.groups.match.length >= 6 && match.groups.match.length <= 9) {
+                console.log(`ticket "${line}" - ${match.groups.match.length}${match.groups.ch}`)
+            } else if (match.groups.match.length == 10) {
+                console.log(`ticket "${line}" - ${match.groups.match.length}${match.groups.ch} Jackpot!`)
+            }
+        } else if (line.length !== 20) {
+            console.log('invalid ticket')
+        } else {
+            console.log(`ticket "${line}" - no match`)
         }
-        if (byTheLessSymbols < 6) return console.log('invalid ticket')
-
-        if (byTheLessSymbols === 10) return console.log(`ticket "${ticket}" - ${byTheLessSymbols}${matchTicket[0][0]} Jackpot!`)
-        else {
-            return console.log(`ticket "${ticket}" - ${byTheLessSymbols}${matchTicket[0][0]}`)
-        }
-    });
+    }
 }
-winningTicket('$$$$$$$$$$$$$$$$$$$$   , aabb,     th@@@@@@#eem@@@@@#ey'
-)
+winningTickets(['$$$$$$$$$$$$$$$$$$$$   , aabb,     th@@@@@@#em@@@@@@#ey'])
 
-winningTicket('validticketnomatch:)')
+// solve('validticketnomatch:)')

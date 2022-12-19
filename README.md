@@ -1,4 +1,5 @@
 # JS-Fund
 
 Starting with JS-Fundamental in SoftUni
-https://softuni.bg/certificates/details/149391/11c6d461
+![small-logo-white](https://user-images.githubusercontent.com/103427078/208328165-a71e23f5-5030-49c0-8076-44118aa6bc11.svg)
+
